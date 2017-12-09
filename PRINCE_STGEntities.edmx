@@ -1,0 +1,989 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PRINCE_STGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="75" />
+          <Property Name="Alias" Type="varchar" MaxLength="75" />
+          <Property Name="Url" Type="varchar" MaxLength="255" />
+          <Property Name="Icon" Type="varchar" MaxLength="255" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="LevelNo" Type="int" />
+          <Property Name="SortNo" Type="int" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteId" Type="int" Nullable="false" />
+          <Property Name="SiteCode" Type="varchar" MaxLength="15" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="STG_DIM_PRICE_BAND">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE_BAND_CODE" />
+            <PropertyRef Name="PROD_LEVEL1_CODE" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRICE_BAND_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRICE_BAND_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PRICE_BAND_LOWER" Type="numeric" Precision="9" Scale="4" />
+          <Property Name="PRICE_BAND_UPPER" Type="numeric" Precision="9" Scale="4" />
+          <Property Name="PRICE_BAND_SEQ" Type="int" />
+          <Property Name="ARC_DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STG_DIM_STOCKAGE_BAND">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="STOCKAGE_BAND_DESC" />
+            <PropertyRef Name="STKAGE_PROD_LEVEL1_CODE" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STOCKAGE_BAND_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="STKAGE_PROD_LEVEL1_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="STOCKAGE_BAND_LOWER" Type="numeric" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="STOCKAGE_BAND_UPPER" Type="numeric" Precision="9" Scale="4" Nullable="false" />
+          <Property Name="STOCKAGE_BAND_SEQ" Type="int" Nullable="false" />
+          <Property Name="LATEST" Type="smallint" />
+          <Property Name="ARC_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="STG_DIM_STORE">
+          <Key>
+            <PropertyRef Name="STORE_CODE" />
+          </Key>
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="STORE_DESCRIPTION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="STORE_SHORT_DESCRIPTION" Type="varchar" MaxLength="20" />
+          <Property Name="GEO_LEVEL1_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="GEO_LEVEL1_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GEO_LEVEL2_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="GEO_LEVEL2_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GEO_LEVEL3_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="GEO_LEVEL3_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GEO_LEVEL4_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="GEO_LEVEL4_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GEO_LEVEL5_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="GEO_LEVEL5_DESC" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_ADDRESS1" Type="varchar" MaxLength="100" />
+          <Property Name="STORE_ADDRESS2" Type="varchar" MaxLength="100" />
+          <Property Name="STORE_PHONE_NO" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_FAX_NO" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_ZIP" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_GROUP" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_STATUS" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_FORMAT" Type="varchar" MaxLength="50" />
+          <Property Name="FRANCHISEE_FLG" Type="char" MaxLength="5" />
+          <Property Name="FRANCHISEE_OWNER" Type="varchar" MaxLength="100" />
+          <Property Name="STORE_OPENING_DATE" Type="datetime" />
+          <Property Name="STORE_OPENING_HOURS" Type="datetime" />
+          <Property Name="STORE_CLOSING_HOURS" Type="datetime" />
+          <Property Name="STORE_CLOSING_DATE" Type="datetime" />
+          <Property Name="GROUP_CURRENCY_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="CURRENCY_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="DC_STORE_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="DC_STORE_DESCRIPTION" Type="varchar" MaxLength="50" />
+          <Property Name="WH_STORE_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="WH_STORE_DESCRIPTION" Type="varchar" MaxLength="50" />
+          <Property Name="BANNER" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_LATITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_LONGITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_ATTRIBUTE1" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_ATTRIBUTE2" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_ATTRIBUTE3" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_ATTRIBUTE4" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_ATTRIBUTE5" Type="varchar" MaxLength="50" />
+          <Property Name="ARC_DATE" Type="datetime" />
+          <Property Name="CHANNEL_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="CHANNEL_DESCRIPTION" Type="varchar" MaxLength="100" />
+          <Property Name="CHANNEL_GROUP_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="CHANNEL_GROUP_DESC" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="STG_FORECAST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FORECAST_DATE" Type="datetime" Nullable="false" />
+          <Property Name="GEO_LEVEL1_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="GEO_LEVEL2_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="GEO_LEVEL3_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL1_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL2_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL3_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL4_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL5_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PRODUCT_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="FORECAST_SALE_QTY" Type="numeric" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="FORECAST_SALE_VAL_AT_PRICE" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="FORECAST_SALE_VAL_AT_COST" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="ARC_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="STG_PLAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLAN_DATE" Type="datetime" Nullable="false" />
+          <Property Name="GEO_LEVEL1_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="GEO_LEVEL2_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="GEO_LEVEL3_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PROD_LEVEL2_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PROD_LEVEL3_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PROD_LEVEL4_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL5_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PRODUCT_CODE" Type="varchar" MaxLength="20" />
+          <Property Name="PLAN_VERSION" Type="int" />
+          <Property Name="PLAN_SALE_QTY" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="PLAN_SALE_VAL_AT_PRICE" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_SALE_VAL_AT_COST" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_MARKDOWN_QTY" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="PLAN_MARKDOWN_VAL" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_SHRINKAGE_VAL" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_PURCHASE_QTY" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="PLAN_PURCHASE_VAL" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_INV_OPENING_QTY" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="PLAN_OPENING_VAL_AT_COST" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_OPENING_VAL_AT_PRICE" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH1" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH2" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH3" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH4" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH5" Type="numeric" Precision="16" Scale="4" />
+          <Property Name="ARC_DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="STG_STR_FOOTFALL">
+          <Key>
+            <PropertyRef Name="FOOTFALL_DATE" />
+            <PropertyRef Name="STORE_CODE" />
+          </Key>
+          <Property Name="FOOTFALL_DATE" Type="datetime" Nullable="false" />
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="FOOTFALL_COUNT" Type="int" />
+          <Property Name="ARC_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="STG_STR_MERCH_DET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STRMRGRP_DATE" Type="datetime" Nullable="false" />
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL2_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL3_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL4_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="SELLING_AREA" Type="numeric" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="TOTAL_AREA" Type="numeric" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="PERMENANT_FTE" Type="int" Nullable="false" />
+          <Property Name="CONTRACT_FTE" Type="int" Nullable="false" />
+          <Property Name="OTH_DET1" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="OTH_DET2" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="OTH_DET3" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="OTH_DET4" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="OTH_DET5" Type="numeric" Precision="12" Scale="3" />
+          <Property Name="ARC_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="STG_TARGET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TARGET_DATE" Type="datetime" Nullable="false" />
+          <Property Name="GEO_LEVEL1_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="GEO_LEVEL2_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="GEO_LEVEL3_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL1_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL2_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL3_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL4_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PROD_LEVEL5_CODE" Type="varchar" MaxLength="5" />
+          <Property Name="PRODUCT_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TARGET_SALE_QTY" Type="numeric" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="TARGET_SALE_VAL_AT_PRICE" Type="numeric" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="TARGET_SALE_VAL_AT_COST" Type="numeric" Precision="16" Scale="4" Nullable="false" />
+          <Property Name="ARC_DATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SuperiorMaintenance">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="PositionLevel" Type="int" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TEMP_DC">
+          <Key>
+            <PropertyRef Name="DC_STORE_CODE" />
+          </Key>
+          <Property Name="DC_STORE_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="DC_STORE_DESCRIPTION" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TEMP_STORE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STORE_DESCRIPTION" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="STORE_LATITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_LONGITUDE" Type="varchar" MaxLength="50" />
+          <Property Name="STORE_OPENING_HOUR" Type="datetime" />
+          <Property Name="STORE_CLOSING_HOUR" Type="datetime" />
+          <Property Name="SOM" Type="varchar" MaxLength="5" />
+          <Property Name="SOM_DESC" Type="varchar" MaxLength="20" />
+          <Property Name="SENIOR_SOM" Type="varchar" MaxLength="5" />
+          <Property Name="SENIOR_SOM_DESC" Type="varchar" MaxLength="50" />
+          <Property Name="AREA_MANAGER" Type="varchar" MaxLength="5" />
+          <Property Name="AREA_MANAGER_DESC" Type="varchar" MaxLength="50" />
+          <Property Name="REGIONAL_MANAGER" Type="varchar" MaxLength="5" />
+          <Property Name="REGIONAL_MANAGER_DESC" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TEMP_STOREDC">
+          <Key>
+            <PropertyRef Name="STORE_CODE" />
+          </Key>
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="STORE_DESCRIPTION" Type="varchar" MaxLength="50" />
+          <Property Name="DC_STORE_CODE" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="EmailAdd" Type="varchar" MaxLength="75" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="varchar" MaxLength="75" />
+          <Property Name="LastName" Type="varchar" MaxLength="75" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+          <Property Name="STORE_CODE" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="UserMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="MenuId" Type="int" />
+          <Property Name="CanAdd" Type="int" />
+          <Property Name="CanEdit" Type="int" />
+          <Property Name="CanDelete" Type="int" />
+          <Property Name="CanView" Type="int" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityContainer Name="PRINCE_STGModelStoreContainer">
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_DIM_PRICE_BAND" EntityType="Self.STG_DIM_PRICE_BAND" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_DIM_STOCKAGE_BAND" EntityType="Self.STG_DIM_STOCKAGE_BAND" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_DIM_STORE" EntityType="Self.STG_DIM_STORE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_FORECAST" EntityType="Self.STG_FORECAST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_PLAN" EntityType="Self.STG_PLAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_STR_FOOTFALL" EntityType="Self.STG_STR_FOOTFALL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_STR_MERCH_DET" EntityType="Self.STG_STR_MERCH_DET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STG_TARGET" EntityType="Self.STG_TARGET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuperiorMaintenance" EntityType="Self.SuperiorMaintenance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEMP_DC" EntityType="Self.TEMP_DC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEMP_STORE" EntityType="Self.TEMP_STORE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEMP_STOREDC" EntityType="Self.TEMP_STOREDC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMenu" EntityType="Self.UserMenu" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PRINCE_STGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="STG_DIM_STORE">
+          <Key>
+            <PropertyRef Name="STORE_CODE" />
+          </Key>
+          <Property Name="STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORE_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORE_SHORT_DESCRIPTION" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GEO_LEVEL1_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL1_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL2_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL2_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL3_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL3_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL4_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL4_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL5_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GEO_LEVEL5_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ADDRESS1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ADDRESS2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_PHONE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_FAX_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ZIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_GROUP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_STATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_FORMAT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FRANCHISEE_FLG" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="FRANCHISEE_OWNER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_OPENING_DATE" Type="DateTime" Precision="3" />
+          <Property Name="STORE_OPENING_HOURS" Type="DateTime" Precision="3" />
+          <Property Name="STORE_CLOSING_HOURS" Type="DateTime" Precision="3" />
+          <Property Name="STORE_CLOSING_DATE" Type="DateTime" Precision="3" />
+          <Property Name="GROUP_CURRENCY_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CURRENCY_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DC_STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DC_STORE_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WH_STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="WH_STORE_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BANNER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_LATITUDE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_LONGITUDE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ATTRIBUTE1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ATTRIBUTE2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ATTRIBUTE3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ATTRIBUTE4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_ATTRIBUTE5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ARC_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CHANNEL_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CHANNEL_DESCRIPTION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CHANNEL_GROUP_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CHANNEL_GROUP_DESC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SuperiorMaintenance">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PositionLevel" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TEMP_DC">
+          <Key>
+            <PropertyRef Name="DC_STORE_CODE" />
+          </Key>
+          <Property Name="DC_STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DC_STORE_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TEMP_STORE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STORE_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORE_LATITUDE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_LONGITUDE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_OPENING_HOUR" Type="DateTime" Precision="3" />
+          <Property Name="STORE_CLOSING_HOUR" Type="DateTime" Precision="3" />
+          <Property Name="SOM" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="SOM_DESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SENIOR_SOM" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="SENIOR_SOM_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AREA_MANAGER" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="AREA_MANAGER_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REGIONAL_MANAGER" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="REGIONAL_MANAGER_DESC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TEMP_STOREDC">
+          <Key>
+            <PropertyRef Name="STORE_CODE" />
+          </Key>
+          <Property Name="STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORE_DESCRIPTION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DC_STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="PRINCE_STGEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="STG_DIM_STORE" EntityType="Self.STG_DIM_STORE" />
+          <EntitySet Name="SuperiorMaintenance" EntityType="Self.SuperiorMaintenance" />
+          <EntitySet Name="TEMP_DC" EntityType="Self.TEMP_DC" />
+          <EntitySet Name="TEMP_STORE" EntityType="Self.TEMP_STORE" />
+          <EntitySet Name="TEMP_STOREDC" EntityType="Self.TEMP_STOREDC" />
+          <EntitySet Name="Menu" EntityType="PRINCE_STGModel.Menu" />
+          <EntitySet Name="User" EntityType="PRINCE_STGModel.User" />
+          <EntitySet Name="UserMenu" EntityType="PRINCE_STGModel.UserMenu" />
+          <EntitySet Name="Site" EntityType="PRINCE_STGModel.Site" />
+          <EntitySet Name="STG_STR_MERCH_DET" EntityType="PRINCE_STGModel.STG_STR_MERCH_DET" />
+          <EntitySet Name="STG_STR_FOOTFALL" EntityType="PRINCE_STGModel.STG_STR_FOOTFALL" />
+          <EntitySet Name="STG_TARGET" EntityType="PRINCE_STGModel.STG_TARGET" />
+          <EntitySet Name="STG_FORECAST" EntityType="PRINCE_STGModel.STG_FORECAST" />
+          <EntitySet Name="STG_PLAN" EntityType="PRINCE_STGModel.STG_PLAN" />
+          <EntitySet Name="STG_DIM_PRICE_BAND" EntityType="PRINCE_STGModel.STG_DIM_PRICE_BAND" />
+          <EntitySet Name="STG_DIM_STOCKAGE_BAND" EntityType="PRINCE_STGModel.STG_DIM_STOCKAGE_BAND" />
+        </EntityContainer>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Alias" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Icon" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="LevelNo" Type="Int32" />
+          <Property Name="SortNo" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="EmailAdd" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="MenuId" Type="Int32" />
+          <Property Name="CanAdd" Type="Int32" />
+          <Property Name="CanEdit" Type="Int32" />
+          <Property Name="CanDelete" Type="Int32" />
+          <Property Name="CanView" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="SiteId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteId" Type="Int32" Nullable="false" />
+          <Property Name="SiteCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="STG_STR_MERCH_DET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STRMRGRP_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="STORE_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL2_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL3_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL4_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="SELLING_AREA" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="TOTAL_AREA" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="PERMENANT_FTE" Type="Int32" Nullable="false" />
+          <Property Name="CONTRACT_FTE" Type="Int32" Nullable="false" />
+          <Property Name="OTH_DET1" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="OTH_DET2" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="OTH_DET3" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="OTH_DET4" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="OTH_DET5" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="ARC_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="STG_STR_FOOTFALL">
+          <Key>
+            <PropertyRef Name="FOOTFALL_DATE" />
+            <PropertyRef Name="STORE_CODE" />
+          </Key>
+          <Property Name="FOOTFALL_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="STORE_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FOOTFALL_COUNT" Type="Int32" />
+          <Property Name="ARC_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="STG_TARGET">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TARGET_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GEO_LEVEL1_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GEO_LEVEL2_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GEO_LEVEL3_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL2_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL3_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL4_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL5_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_CODE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TARGET_SALE_QTY" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="TARGET_SALE_VAL_AT_PRICE" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="TARGET_SALE_VAL_AT_COST" Type="Decimal" Nullable="false" Precision="16" Scale="4" />
+          <Property Name="ARC_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="STG_FORECAST">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FORECAST_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GEO_LEVEL1_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GEO_LEVEL2_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GEO_LEVEL3_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL2_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL3_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL4_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL5_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FORECAST_SALE_QTY" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="FORECAST_SALE_VAL_AT_PRICE" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="FORECAST_SALE_VAL_AT_COST" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="ARC_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="STG_PLAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLAN_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GEO_LEVEL1_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GEO_LEVEL2_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="GEO_LEVEL3_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="STORE_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL2_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL3_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL4_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL5_CODE" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCT_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PLAN_VERSION" Type="Int32" />
+          <Property Name="PLAN_SALE_QTY" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="PLAN_SALE_VAL_AT_PRICE" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_SALE_VAL_AT_COST" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_MARKDOWN_QTY" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="PLAN_MARKDOWN_VAL" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_SHRINKAGE_VAL" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_PURCHASE_QTY" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="PLAN_PURCHASE_VAL" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_INV_OPENING_QTY" Type="Decimal" Precision="12" Scale="3" />
+          <Property Name="PLAN_OPENING_VAL_AT_COST" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_OPENING_VAL_AT_PRICE" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH1" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH2" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH3" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH4" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="PLAN_OTH5" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="ARC_DATE" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="STG_DIM_PRICE_BAND">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PRICE_BAND_CODE" />
+            <PropertyRef Name="PROD_LEVEL1_CODE" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRICE_BAND_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRICE_BAND_DESC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PROD_LEVEL1_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PRICE_BAND_LOWER" Type="Decimal" Precision="9" Scale="4" />
+          <Property Name="PRICE_BAND_UPPER" Type="Decimal" Precision="9" Scale="4" />
+          <Property Name="PRICE_BAND_SEQ" Type="Int32" />
+          <Property Name="ARC_DATE" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="STG_DIM_STOCKAGE_BAND">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="STOCKAGE_BAND_DESC" />
+            <PropertyRef Name="STKAGE_PROD_LEVEL1_CODE" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STOCKAGE_BAND_DESC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STKAGE_PROD_LEVEL1_CODE" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="STOCKAGE_BAND_LOWER" Type="Decimal" Nullable="false" Precision="9" Scale="4" />
+          <Property Name="STOCKAGE_BAND_UPPER" Type="Decimal" Nullable="false" Precision="9" Scale="4" />
+          <Property Name="STOCKAGE_BAND_SEQ" Type="Int32" Nullable="false" />
+          <Property Name="LATEST" Type="Int16" />
+          <Property Name="ARC_DATE" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PRINCE_STGModelStoreContainer" CdmEntityContainer="PRINCE_STGEntities">
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_DIM_STORE">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_DIM_STORE">
+              <MappingFragment StoreEntitySet="STG_DIM_STORE">
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="STORE_DESCRIPTION" ColumnName="STORE_DESCRIPTION" />
+                <ScalarProperty Name="STORE_SHORT_DESCRIPTION" ColumnName="STORE_SHORT_DESCRIPTION" />
+                <ScalarProperty Name="GEO_LEVEL1_CODE" ColumnName="GEO_LEVEL1_CODE" />
+                <ScalarProperty Name="GEO_LEVEL1_DESC" ColumnName="GEO_LEVEL1_DESC" />
+                <ScalarProperty Name="GEO_LEVEL2_CODE" ColumnName="GEO_LEVEL2_CODE" />
+                <ScalarProperty Name="GEO_LEVEL2_DESC" ColumnName="GEO_LEVEL2_DESC" />
+                <ScalarProperty Name="GEO_LEVEL3_CODE" ColumnName="GEO_LEVEL3_CODE" />
+                <ScalarProperty Name="GEO_LEVEL3_DESC" ColumnName="GEO_LEVEL3_DESC" />
+                <ScalarProperty Name="GEO_LEVEL4_CODE" ColumnName="GEO_LEVEL4_CODE" />
+                <ScalarProperty Name="GEO_LEVEL4_DESC" ColumnName="GEO_LEVEL4_DESC" />
+                <ScalarProperty Name="GEO_LEVEL5_CODE" ColumnName="GEO_LEVEL5_CODE" />
+                <ScalarProperty Name="GEO_LEVEL5_DESC" ColumnName="GEO_LEVEL5_DESC" />
+                <ScalarProperty Name="STORE_ADDRESS1" ColumnName="STORE_ADDRESS1" />
+                <ScalarProperty Name="STORE_ADDRESS2" ColumnName="STORE_ADDRESS2" />
+                <ScalarProperty Name="STORE_PHONE_NO" ColumnName="STORE_PHONE_NO" />
+                <ScalarProperty Name="STORE_FAX_NO" ColumnName="STORE_FAX_NO" />
+                <ScalarProperty Name="STORE_ZIP" ColumnName="STORE_ZIP" />
+                <ScalarProperty Name="STORE_TYPE" ColumnName="STORE_TYPE" />
+                <ScalarProperty Name="STORE_GROUP" ColumnName="STORE_GROUP" />
+                <ScalarProperty Name="STORE_STATUS" ColumnName="STORE_STATUS" />
+                <ScalarProperty Name="STORE_FORMAT" ColumnName="STORE_FORMAT" />
+                <ScalarProperty Name="FRANCHISEE_FLG" ColumnName="FRANCHISEE_FLG" />
+                <ScalarProperty Name="FRANCHISEE_OWNER" ColumnName="FRANCHISEE_OWNER" />
+                <ScalarProperty Name="STORE_OPENING_DATE" ColumnName="STORE_OPENING_DATE" />
+                <ScalarProperty Name="STORE_OPENING_HOURS" ColumnName="STORE_OPENING_HOURS" />
+                <ScalarProperty Name="STORE_CLOSING_HOURS" ColumnName="STORE_CLOSING_HOURS" />
+                <ScalarProperty Name="STORE_CLOSING_DATE" ColumnName="STORE_CLOSING_DATE" />
+                <ScalarProperty Name="GROUP_CURRENCY_CODE" ColumnName="GROUP_CURRENCY_CODE" />
+                <ScalarProperty Name="CURRENCY_CODE" ColumnName="CURRENCY_CODE" />
+                <ScalarProperty Name="DC_STORE_CODE" ColumnName="DC_STORE_CODE" />
+                <ScalarProperty Name="DC_STORE_DESCRIPTION" ColumnName="DC_STORE_DESCRIPTION" />
+                <ScalarProperty Name="WH_STORE_CODE" ColumnName="WH_STORE_CODE" />
+                <ScalarProperty Name="WH_STORE_DESCRIPTION" ColumnName="WH_STORE_DESCRIPTION" />
+                <ScalarProperty Name="BANNER" ColumnName="BANNER" />
+                <ScalarProperty Name="STORE_LATITUDE" ColumnName="STORE_LATITUDE" />
+                <ScalarProperty Name="STORE_LONGITUDE" ColumnName="STORE_LONGITUDE" />
+                <ScalarProperty Name="STORE_ATTRIBUTE1" ColumnName="STORE_ATTRIBUTE1" />
+                <ScalarProperty Name="STORE_ATTRIBUTE2" ColumnName="STORE_ATTRIBUTE2" />
+                <ScalarProperty Name="STORE_ATTRIBUTE3" ColumnName="STORE_ATTRIBUTE3" />
+                <ScalarProperty Name="STORE_ATTRIBUTE4" ColumnName="STORE_ATTRIBUTE4" />
+                <ScalarProperty Name="STORE_ATTRIBUTE5" ColumnName="STORE_ATTRIBUTE5" />
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="CHANNEL_CODE" ColumnName="CHANNEL_CODE" />
+                <ScalarProperty Name="CHANNEL_DESCRIPTION" ColumnName="CHANNEL_DESCRIPTION" />
+                <ScalarProperty Name="CHANNEL_GROUP_CODE" ColumnName="CHANNEL_GROUP_CODE" />
+                <ScalarProperty Name="CHANNEL_GROUP_DESC" ColumnName="CHANNEL_GROUP_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuperiorMaintenance">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.SuperiorMaintenance">
+              <MappingFragment StoreEntitySet="SuperiorMaintenance">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PositionLevel" ColumnName="PositionLevel" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMP_DC">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.TEMP_DC">
+              <MappingFragment StoreEntitySet="TEMP_DC">
+                <ScalarProperty Name="DC_STORE_CODE" ColumnName="DC_STORE_CODE" />
+                <ScalarProperty Name="DC_STORE_DESCRIPTION" ColumnName="DC_STORE_DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMP_STORE">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.TEMP_STORE">
+              <MappingFragment StoreEntitySet="TEMP_STORE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="STORE_DESCRIPTION" ColumnName="STORE_DESCRIPTION" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="STORE_LATITUDE" ColumnName="STORE_LATITUDE" />
+                <ScalarProperty Name="STORE_LONGITUDE" ColumnName="STORE_LONGITUDE" />
+                <ScalarProperty Name="STORE_OPENING_HOUR" ColumnName="STORE_OPENING_HOUR" />
+                <ScalarProperty Name="STORE_CLOSING_HOUR" ColumnName="STORE_CLOSING_HOUR" />
+                <ScalarProperty Name="SOM" ColumnName="SOM" />
+                <ScalarProperty Name="SOM_DESC" ColumnName="SOM_DESC" />
+                <ScalarProperty Name="SENIOR_SOM" ColumnName="SENIOR_SOM" />
+                <ScalarProperty Name="SENIOR_SOM_DESC" ColumnName="SENIOR_SOM_DESC" />
+                <ScalarProperty Name="AREA_MANAGER" ColumnName="AREA_MANAGER" />
+                <ScalarProperty Name="AREA_MANAGER_DESC" ColumnName="AREA_MANAGER_DESC" />
+                <ScalarProperty Name="REGIONAL_MANAGER" ColumnName="REGIONAL_MANAGER" />
+                <ScalarProperty Name="REGIONAL_MANAGER_DESC" ColumnName="REGIONAL_MANAGER_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMP_STOREDC">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.TEMP_STOREDC">
+              <MappingFragment StoreEntitySet="TEMP_STOREDC">
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="STORE_DESCRIPTION" ColumnName="STORE_DESCRIPTION" />
+                <ScalarProperty Name="DC_STORE_CODE" ColumnName="DC_STORE_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+                <ScalarProperty Name="LevelNo" ColumnName="LevelNo" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailAdd" ColumnName="EmailAdd" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMenu">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.UserMenu">
+              <MappingFragment StoreEntitySet="UserMenu">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CanView" ColumnName="CanView" />
+                <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
+                <ScalarProperty Name="CanEdit" ColumnName="CanEdit" />
+                <ScalarProperty Name="CanAdd" ColumnName="CanAdd" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Site">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.Site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SiteCode" ColumnName="SiteCode" />
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_STR_MERCH_DET">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_STR_MERCH_DET">
+              <MappingFragment StoreEntitySet="STG_STR_MERCH_DET">
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="OTH_DET5" ColumnName="OTH_DET5" />
+                <ScalarProperty Name="OTH_DET4" ColumnName="OTH_DET4" />
+                <ScalarProperty Name="OTH_DET3" ColumnName="OTH_DET3" />
+                <ScalarProperty Name="OTH_DET2" ColumnName="OTH_DET2" />
+                <ScalarProperty Name="OTH_DET1" ColumnName="OTH_DET1" />
+                <ScalarProperty Name="CONTRACT_FTE" ColumnName="CONTRACT_FTE" />
+                <ScalarProperty Name="PERMENANT_FTE" ColumnName="PERMENANT_FTE" />
+                <ScalarProperty Name="TOTAL_AREA" ColumnName="TOTAL_AREA" />
+                <ScalarProperty Name="SELLING_AREA" ColumnName="SELLING_AREA" />
+                <ScalarProperty Name="PROD_LEVEL4_CODE" ColumnName="PROD_LEVEL4_CODE" />
+                <ScalarProperty Name="PROD_LEVEL3_CODE" ColumnName="PROD_LEVEL3_CODE" />
+                <ScalarProperty Name="PROD_LEVEL2_CODE" ColumnName="PROD_LEVEL2_CODE" />
+                <ScalarProperty Name="PROD_LEVEL1_CODE" ColumnName="PROD_LEVEL1_CODE" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="STRMRGRP_DATE" ColumnName="STRMRGRP_DATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_STR_FOOTFALL">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_STR_FOOTFALL">
+              <MappingFragment StoreEntitySet="STG_STR_FOOTFALL">
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="FOOTFALL_COUNT" ColumnName="FOOTFALL_COUNT" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="FOOTFALL_DATE" ColumnName="FOOTFALL_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_TARGET">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_TARGET">
+              <MappingFragment StoreEntitySet="STG_TARGET">
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="TARGET_SALE_VAL_AT_COST" ColumnName="TARGET_SALE_VAL_AT_COST" />
+                <ScalarProperty Name="TARGET_SALE_VAL_AT_PRICE" ColumnName="TARGET_SALE_VAL_AT_PRICE" />
+                <ScalarProperty Name="TARGET_SALE_QTY" ColumnName="TARGET_SALE_QTY" />
+                <ScalarProperty Name="PRODUCT_CODE" ColumnName="PRODUCT_CODE" />
+                <ScalarProperty Name="PROD_LEVEL5_CODE" ColumnName="PROD_LEVEL5_CODE" />
+                <ScalarProperty Name="PROD_LEVEL4_CODE" ColumnName="PROD_LEVEL4_CODE" />
+                <ScalarProperty Name="PROD_LEVEL3_CODE" ColumnName="PROD_LEVEL3_CODE" />
+                <ScalarProperty Name="PROD_LEVEL2_CODE" ColumnName="PROD_LEVEL2_CODE" />
+                <ScalarProperty Name="PROD_LEVEL1_CODE" ColumnName="PROD_LEVEL1_CODE" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="GEO_LEVEL3_CODE" ColumnName="GEO_LEVEL3_CODE" />
+                <ScalarProperty Name="GEO_LEVEL2_CODE" ColumnName="GEO_LEVEL2_CODE" />
+                <ScalarProperty Name="GEO_LEVEL1_CODE" ColumnName="GEO_LEVEL1_CODE" />
+                <ScalarProperty Name="TARGET_DATE" ColumnName="TARGET_DATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_FORECAST">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_FORECAST">
+              <MappingFragment StoreEntitySet="STG_FORECAST">
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="FORECAST_SALE_VAL_AT_COST" ColumnName="FORECAST_SALE_VAL_AT_COST" />
+                <ScalarProperty Name="FORECAST_SALE_VAL_AT_PRICE" ColumnName="FORECAST_SALE_VAL_AT_PRICE" />
+                <ScalarProperty Name="FORECAST_SALE_QTY" ColumnName="FORECAST_SALE_QTY" />
+                <ScalarProperty Name="PRODUCT_CODE" ColumnName="PRODUCT_CODE" />
+                <ScalarProperty Name="PROD_LEVEL5_CODE" ColumnName="PROD_LEVEL5_CODE" />
+                <ScalarProperty Name="PROD_LEVEL4_CODE" ColumnName="PROD_LEVEL4_CODE" />
+                <ScalarProperty Name="PROD_LEVEL3_CODE" ColumnName="PROD_LEVEL3_CODE" />
+                <ScalarProperty Name="PROD_LEVEL2_CODE" ColumnName="PROD_LEVEL2_CODE" />
+                <ScalarProperty Name="PROD_LEVEL1_CODE" ColumnName="PROD_LEVEL1_CODE" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="GEO_LEVEL3_CODE" ColumnName="GEO_LEVEL3_CODE" />
+                <ScalarProperty Name="GEO_LEVEL2_CODE" ColumnName="GEO_LEVEL2_CODE" />
+                <ScalarProperty Name="GEO_LEVEL1_CODE" ColumnName="GEO_LEVEL1_CODE" />
+                <ScalarProperty Name="FORECAST_DATE" ColumnName="FORECAST_DATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_PLAN">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_PLAN">
+              <MappingFragment StoreEntitySet="STG_PLAN">
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="PLAN_OTH5" ColumnName="PLAN_OTH5" />
+                <ScalarProperty Name="PLAN_OTH4" ColumnName="PLAN_OTH4" />
+                <ScalarProperty Name="PLAN_OTH3" ColumnName="PLAN_OTH3" />
+                <ScalarProperty Name="PLAN_OTH2" ColumnName="PLAN_OTH2" />
+                <ScalarProperty Name="PLAN_OTH1" ColumnName="PLAN_OTH1" />
+                <ScalarProperty Name="PLAN_OPENING_VAL_AT_PRICE" ColumnName="PLAN_OPENING_VAL_AT_PRICE" />
+                <ScalarProperty Name="PLAN_OPENING_VAL_AT_COST" ColumnName="PLAN_OPENING_VAL_AT_COST" />
+                <ScalarProperty Name="PLAN_INV_OPENING_QTY" ColumnName="PLAN_INV_OPENING_QTY" />
+                <ScalarProperty Name="PLAN_PURCHASE_VAL" ColumnName="PLAN_PURCHASE_VAL" />
+                <ScalarProperty Name="PLAN_PURCHASE_QTY" ColumnName="PLAN_PURCHASE_QTY" />
+                <ScalarProperty Name="PLAN_SHRINKAGE_VAL" ColumnName="PLAN_SHRINKAGE_VAL" />
+                <ScalarProperty Name="PLAN_MARKDOWN_VAL" ColumnName="PLAN_MARKDOWN_VAL" />
+                <ScalarProperty Name="PLAN_MARKDOWN_QTY" ColumnName="PLAN_MARKDOWN_QTY" />
+                <ScalarProperty Name="PLAN_SALE_VAL_AT_COST" ColumnName="PLAN_SALE_VAL_AT_COST" />
+                <ScalarProperty Name="PLAN_SALE_VAL_AT_PRICE" ColumnName="PLAN_SALE_VAL_AT_PRICE" />
+                <ScalarProperty Name="PLAN_SALE_QTY" ColumnName="PLAN_SALE_QTY" />
+                <ScalarProperty Name="PLAN_VERSION" ColumnName="PLAN_VERSION" />
+                <ScalarProperty Name="PRODUCT_CODE" ColumnName="PRODUCT_CODE" />
+                <ScalarProperty Name="PROD_LEVEL5_CODE" ColumnName="PROD_LEVEL5_CODE" />
+                <ScalarProperty Name="PROD_LEVEL4_CODE" ColumnName="PROD_LEVEL4_CODE" />
+                <ScalarProperty Name="PROD_LEVEL3_CODE" ColumnName="PROD_LEVEL3_CODE" />
+                <ScalarProperty Name="PROD_LEVEL2_CODE" ColumnName="PROD_LEVEL2_CODE" />
+                <ScalarProperty Name="PROD_LEVEL1_CODE" ColumnName="PROD_LEVEL1_CODE" />
+                <ScalarProperty Name="STORE_CODE" ColumnName="STORE_CODE" />
+                <ScalarProperty Name="GEO_LEVEL3_CODE" ColumnName="GEO_LEVEL3_CODE" />
+                <ScalarProperty Name="GEO_LEVEL2_CODE" ColumnName="GEO_LEVEL2_CODE" />
+                <ScalarProperty Name="GEO_LEVEL1_CODE" ColumnName="GEO_LEVEL1_CODE" />
+                <ScalarProperty Name="PLAN_DATE" ColumnName="PLAN_DATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_DIM_PRICE_BAND">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_DIM_PRICE_BAND">
+              <MappingFragment StoreEntitySet="STG_DIM_PRICE_BAND">
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="PRICE_BAND_SEQ" ColumnName="PRICE_BAND_SEQ" />
+                <ScalarProperty Name="PRICE_BAND_UPPER" ColumnName="PRICE_BAND_UPPER" />
+                <ScalarProperty Name="PRICE_BAND_LOWER" ColumnName="PRICE_BAND_LOWER" />
+                <ScalarProperty Name="PROD_LEVEL1_CODE" ColumnName="PROD_LEVEL1_CODE" />
+                <ScalarProperty Name="PRICE_BAND_DESC" ColumnName="PRICE_BAND_DESC" />
+                <ScalarProperty Name="PRICE_BAND_CODE" ColumnName="PRICE_BAND_CODE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STG_DIM_STOCKAGE_BAND">
+            <EntityTypeMapping TypeName="PRINCE_STGModel.STG_DIM_STOCKAGE_BAND">
+              <MappingFragment StoreEntitySet="STG_DIM_STOCKAGE_BAND">
+                <ScalarProperty Name="ARC_DATE" ColumnName="ARC_DATE" />
+                <ScalarProperty Name="LATEST" ColumnName="LATEST" />
+                <ScalarProperty Name="STOCKAGE_BAND_SEQ" ColumnName="STOCKAGE_BAND_SEQ" />
+                <ScalarProperty Name="STOCKAGE_BAND_UPPER" ColumnName="STOCKAGE_BAND_UPPER" />
+                <ScalarProperty Name="STOCKAGE_BAND_LOWER" ColumnName="STOCKAGE_BAND_LOWER" />
+                <ScalarProperty Name="STKAGE_PROD_LEVEL1_CODE" ColumnName="STKAGE_PROD_LEVEL1_CODE" />
+                <ScalarProperty Name="STOCKAGE_BAND_DESC" ColumnName="STOCKAGE_BAND_DESC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
